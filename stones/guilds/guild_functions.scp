@@ -36,26 +36,27 @@ If (<argo.memoryfindtype.<def0.memory_guild>.uid>)
 endif
 
 If (<ref1.memberfromuid.<argo.uid>.uid> != <argo.uid>)
-  If ((<ref1.masteruid> == <uid>) || (<isgm>))
-    If (<def0.GUILDCONFIG_MAXMEMBERS>)
-      If (<ref1.member.count <def0.STONEPRIV_MEMBER>> < <def0.GUILDCONFIG_MAXMEMBERS>)
+    If ((<ref1.masteruid> == <uid>) || (<isgm>))
+        If (<def0.GUILDCONFIG_MAXMEMBERS>)
+            If (<ref1.member.count <def0.STONEPRIV_MEMBER>> < <def0.GUILDCONFIG_MAXMEMBERS>)
+            f_guildsys_addchartoguild <ref1.uid>,<argo.uid>,1
+            else
+            sysmessage @038A There are already <dDEF0.GUILDCONFIG_MAXMEMBERS> members. You cannot submit a member at this time.
+            endif
+        else
         f_guildsys_addchartoguild <ref1.uid>,<argo.uid>,1
-      else
-        sysmessage @038A There are already <dDEF0.GUILDCONFIG_MAXMEMBERS> members. You cannot submit a member at this time.
-      endif
+        endif
     else
-      f_guildsys_addchartoguild <ref1.uid>,<argo.uid>,1
-    endif
-  else
-    If (<def0.GUILDCONFIG_MAXCANDIDATES>)
-      If (<ref1.member.count <def0.STONEPRIV_CANDIDATE>> < <def0.GUILDCONFIG_MAXCANDIDATES>)
+      If (<def0.GUILDCONFIG_MAXCANDIDATES>)
+        If (<ref1.member.count <def0.STONEPRIV_CANDIDATE>> < <def0.GUILDCONFIG_MAXCANDIDATES>)
         f_guildsys_addchartoguild <ref1.uid>,<argo.uid>,0
-      else
+        else
         sysmessage @038A There are already <dDEF0.GUILDCONFIG_MAXCANDIDATES> candidates awaiting a decision. You cannot submit a candidate at this time.
-      endif
-    else
+        endif
+      else
       f_guildsys_addchartoguild <ref1.uid>,<argo.uid>,0
-    endif
+      endif
+    enidif
 else
   sysmessage @038A They are already a candidate.
 endif
